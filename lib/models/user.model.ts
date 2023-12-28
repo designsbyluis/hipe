@@ -14,12 +14,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  school: {
-    type: String,
-    required: true,
-  },
   image: String,
   bio: String,
+  school:String,
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -36,18 +33,6 @@ const userSchema = new mongoose.Schema({
       ref: "Community",
     },
   ],
-  conversationIds: [
-   {
-       type: mongoose.Schema.Types.ObjectId,
-       ref: 'Conversation'
-   }
-],
-messages: [
-   {
-       type: mongoose.Schema.Types.ObjectId,
-       ref: 'Message'
-   }
-]
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

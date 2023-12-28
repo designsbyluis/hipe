@@ -5,21 +5,21 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import AccountProfile from "@/components/forms/AccountProfile";
 
 async function Page() {
-    const user = await currentUser();
-    if (!user) return null; // to avoid typescript warnings
-  
-    const userInfo = await fetchUser(user.id);
-    if (userInfo?.onboarded) redirect("/");
+  const user = await currentUser();
+  if (!user) return null; // to avoid typescript warnings
 
-    const userData = {
-        id: user.id,
-        objectId: userInfo?._id,
-        username: userInfo ? userInfo?.username : user.username,
-        name: userInfo ? userInfo?.name : user.firstName ?? "",
-        school: userInfo ? userInfo?.school : "",
-        bio: userInfo ? userInfo?.bio : "",
-        image: userInfo ? userInfo?.image : user.imageUrl,
-      };
+  const userInfo = await fetchUser(user.id);
+  if (userInfo?.onboarded) redirect("/");
+
+  const userData = {
+    id: user.id,
+    objectId: userInfo?._id,
+    username: userInfo ? userInfo?.username : user.username,
+    name: userInfo ? userInfo?.name : user.firstName ?? "",
+    bio: userInfo ? userInfo?.bio : "",
+    school: userInfo ? userInfo?.school: "",
+    image: userInfo ? userInfo?.image : user.imageUrl,
+  };
 
     return (
         <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 lg:px-20 py-10">

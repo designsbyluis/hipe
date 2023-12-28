@@ -59,17 +59,18 @@ interface Props {
             </div>
   
             <div className='flex w-full flex-col'>
-              <Link href={`/profile/${author.id}`} className='w-fit'>
-                <h4 className='cursor-pointer text-base-semibold text-dark-1'>
-                  {author.name}
-                </h4>
-                <div className="flex-center mt-1 gap-2 text-light-3">
-              <p className="subtle-semibold lg:small-regular ">
+          <Link href={`/profile/${author.id}`} className='w-fit'>
+            <div className='flex items-start flex-col'> {/* Use flex-col to stack elements */}
+              <h4 className='cursor-pointer text-base-semibold text-dark-1'>
+                {author.name}
+              </h4>
+              <div className="flex-center mt-1 gap-2"></div>
+              <p className="subtle-semibold lg:small-regular text-light-3">
                 {multiFormatDateString(createdAt)}
               </p>
-              </div>
-              </Link>
-              <p className='mt-2 text-small-regular text-dark-2'>{content}</p>
+            </div>
+          </Link>
+          <p className='mt-2 text-small-regular text-dark-2'>{content}</p>
   
               <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
                 <div className='flex gap-3.5'>
