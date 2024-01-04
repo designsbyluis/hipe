@@ -28,7 +28,7 @@
 
   /* Community Card */
   .community-card {
-    @apply w-full rounded-lg bg-dark-3 px-4 py-5 sm:w-96;
+    @apply w-full rounded-lg bg-light-2 px-4 py-5 sm:w-96;
   }
 
   .community-card_btn {
@@ -116,11 +116,31 @@
     @apply bg-primary-500 hover:bg-primary-500 text-light-1 flex gap-2 !important;
   }
 
+  .button {
+    @apply rounded-full h-[54px] p-regular-16;
+  }
+
 }
 
 
 
 @layer utilities {
+  .textarea {
+    @apply bg-gray-100 flex flex-1 placeholder:text-gray-500 p-regular-16 px-5 py-3 border-none focus-visible:ring-transparent !important;
+  }
+  
+  .select-item {
+    @apply py-3 cursor-pointer  focus:bg-gray-400;
+  }
+
+  .select-field {
+    @apply w-full bg-gray-100 h-[54px] placeholder:text-gray-500 rounded-full p-regular-16 px-5 py-3 border-none focus-visible:ring-transparent focus:ring-transparent !important;
+  }
+
+  .input-field {
+    @apply bg-gray-100 h-[54px] focus-visible:ring-offset-0 placeholder:text-gray-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent !important;
+  }
+
   .css-invert {
     @apply invert-[50%] brightness-200;
   }
@@ -142,6 +162,9 @@
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgb(227, 227, 238);
+  }
+  .wrapper {
+    @apply max-w-7xl lg:mx-auto p-5 md:px-10 xl:px-0 w-full;
   }
 }
 /* TYPOGRAPHY */
@@ -394,3 +417,10 @@
   @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
 }
 
+.filter-grey {
+  filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%)
+    hue-rotate(32deg) brightness(98%) contrast(92%);
+}
+.datePicker {
+  width: 100%;
+}

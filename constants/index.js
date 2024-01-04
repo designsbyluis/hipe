@@ -52,3 +52,17 @@ export const sidebarLinks = [
     { value: "members", label: "Members", icon: "/assets/members.svg" },
     { value: "test3", label: "Test3", icon: "/assets/skills.svg" },
   ];
+
+  export const OpportunitiesDefaultValues = {
+    title: '',
+    description: '',
+    location: '',
+    deadline: new Date(),
+    imageUrl: '',
+    startDateTime: new Date(),
+    endDateTime: new Date(),
+    categoryId: '',
+    compensation: '',
+    isFree: false,
+    url: '',
+  }

@@ -1,21 +1,21 @@
 import OpportunitiesForm from "@/components/shared/OpportunitiesForm";
 import { auth } from "@clerk/nextjs";
 
-const CreateOpportunity = () => {
+const EditOpportunity = () => {
     const { sessionClaims } = auth();
 
     const userId = sessionClaims?.userId as string;
   return (
     <>
-    <section className="bg-gray-50 bg-dotted-pattern bg-cover bg-center">
-        <h3 className="wrapper head-text text-center sm:text-left">Create Opportunity</h3>
+    <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
+        <h3 className="wrapper h3-bold text-center sm:text-left">Edit Opportunity</h3>
     </section>
 
     <div className="wrapper my-8">
-        <OpportunitiesForm userId={userId} type="Create"/>
+        <OpportunitiesForm userId={userId} type="Edit"/>
     </div>
     </>
   )
 }
 
-export default CreateOpportunity;
+export default EditOpportunity;

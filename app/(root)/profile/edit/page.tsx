@@ -25,8 +25,8 @@ async function Page() {
 
   return (
     <>
-      <h1 className='head-text-2'>Edit Profile</h1>
-      <p className='mt-3 head-text text-dark-2'>Make any changes</p>
+      <h1 className='head-text'>Edit Profile</h1>
+      <p className='mt-3 font-semibold text-gray-700'>Make any changes</p>
 
       <section className='mt-12'>
         <AccountProfile user={userData} btnTitle='Continue' />

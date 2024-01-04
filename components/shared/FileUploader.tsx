@@ -1,66 +1,56 @@
-import Image from 'next/image'
-import React, { useCallback, useState } from 'react'
-import { FileWithPath, useDropzone } from 'react-dropzone'
-import { Button } from '../ui/button'
+"use client"
+
+import { useCallback, Dispatch, SetStateAction } from 'react'
+import type { FileWithPath } from '@uploadthing/react'
+import { useDropzone } from '@uploadthing/react/hooks'
+import { generateClientDropzoneAccept } from 'uploadthing/client'
+
+import { Button } from '@/components/ui/button'
+import { convertFileToUrl } from '@/lib/utils'
 
 type FileUploaderProps = {
-    fieldChange: (FILES: File[]) => void;
-    mediaUrl: string;
+  onFieldChange: (url: string) => void
+  imageUrl: string
+  setFiles: Dispatch<SetStateAction<File[]>>
 }
 
-const FileUploader = ({ fieldChange, mediaUrl}: FileUploaderProps) => {
-    const [file, setfile] = useState<File[]>([]);
-    const [fileUrl, setFileUrl] = useState('');
+export function FileUploader({ imageUrl, onFieldChange, setFiles }: FileUploaderProps) {
+  const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
+    setFiles(acceptedFiles)
+    onFieldChange(convertFileToUrl(acceptedFiles[0]))
+  }, [])
 
-    const onDrop = useCallback(
-        (acceptedFiles: FileWithPath[]) => {
-            setfile(acceptedFiles)
-            fieldChange(acceptedFiles)
-            setFileUrl(URL.createObjectURL(acceptedFiles[0]))
-      }, [file]
-    )
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: 'image/*' ? generateClientDropzoneAccept(['image/*']) : undefined,
+  })
 
-      const { getRootProps, getInputProps} = useDropzone({
-        onDrop,
-        accept: {
-            'image/*': ['.png', '.jpeg', '.jpg', '.svg']
-        }    
-    })
   return (
+    <div
+      {...getRootProps()}
+      className="flex-center bg-gray-100 flex h-72 cursor-pointer flex-col overflow-hidden rounded-xl bg-grey-50">
+      <input {...getInputProps()} className="cursor-pointer" />
 
-    <div {...getRootProps()} className="flex flex-center flex-col bg-light-2 rounded-xl cursor-pointer">
-      <input {...getInputProps()} className="cursor-pointer"/>
-      {
-        fileUrl ? (
-            <>
-            <div className="flex flex-1 justify-center w-full p-5 lg:p-10">
-                <img
-                    src={fileUrl}
-                    alt="image"
-                    className="file_uploader-img"
-                />
-            </div>
-                <p className="file_uploader-label">Click or drag photo to replace</p>
-            </>
-        ) : (
-            <div className="file_uploader-box">
-                <Image
-                    src="/assets/file-upload.svg"
-                    width={96}
-                    height={77}
-                    alt="file-upload" 
-                />
-                <h3 className="base-medium text-gray-400 mb-2 mt-6">Drag photos here</h3>
-                <p className="text-gray-400 small-regular mb-6">PNG, JPG, SVG</p>
-
-                <Button className="shad-button_dark_4">
-                    Select photos
-                </Button>
-            </div>
-        )
-      }
+      {imageUrl ? (
+        <div className="flex h-full w-full flex-1 justify-center ">
+          <img
+            src={imageUrl}
+            alt="image"
+            width={250}
+            height={250}
+            className="w-full object-cover object-center"
+          />
+        </div>
+      ) : (
+        <div className="flex-center flex-col py-5 text-grey-500">
+          <img src="/assets/upload.svg" width={77} height={77} alt="file upload" />
+          <h3 className="mb-2 mt-2">Drag photo here</h3>
+          <p className="p-medium-12 mb-4">SVG, PNG, JPG</p>
+          <Button type="button" className="rounded-full bg-primary-500">
+            Select from computer
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
-
-export default FileUploader;

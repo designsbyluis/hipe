@@ -1,9 +1,15 @@
-const Page = async () => {
-    return (
-        <section>
-            <h1 className="head-text mb-10">Opportunities</h1>
-        </section>
-    )
-}
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-export default Page;
+const Page = () => {
+    return (
+      <section>
+        <h1 className="head-text mb-10">Opportunities</h1>
+        <Link href="/opportunities/create">
+            <Button>Create Opportunity</Button> 
+        </Link>
+      </section>
+    );
+  };
+  
+  export default Page;
